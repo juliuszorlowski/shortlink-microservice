@@ -1,7 +1,6 @@
 package com.microservice.shortlink.controllers;
 
 import com.microservice.shortlink.dtos.ShortenLinkRequest;
-import com.microservice.shortlink.mappers.LinkMapper;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -14,8 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 @AllArgsConstructor
 @RequestMapping()
 public class LinkController {
-    private final LinkMapper linkMapper;
-
     @PostMapping("/shorten")
     public ResponseEntity<?> shortenLink(@Valid @RequestBody ShortenLinkRequest request) {
 
