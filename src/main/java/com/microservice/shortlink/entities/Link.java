@@ -1,14 +1,16 @@
 package com.microservice.shortlink.entities;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Setter
 @Getter
 @Entity
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "links")
 public class Link {
     @Id
@@ -19,11 +21,11 @@ public class Link {
     @Column(name = "url")
     private String url;
 
-    @Column(name = "shortened_url")
-    private String shortenedUrl;
+    @Column(name = "code")
+    private String code;
 
     @Column(name = "created_at")
-    private Date createdAt;
+    private LocalDateTime createdAt;
 
     @Column(name = "click_count")
     private Integer clickCount;
