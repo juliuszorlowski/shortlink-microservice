@@ -2,6 +2,7 @@ package com.microservice.shortlink.services;
 
 import com.microservice.shortlink.dtos.ShortenLinkRequest;
 import com.microservice.shortlink.entities.Link;
+import com.microservice.shortlink.exceptions.LinkNotFoundException;
 import com.microservice.shortlink.repositories.LinkRepository;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
@@ -34,7 +35,7 @@ public class LinkService {
     public Link findLinkAndIncrementClickCount(String code) {
         var link = linkRepository.findByCode(code).orElse(null);
         if (link == null) {
-            return null;
+            throw new LinkNotFoundException();
         }
 
         link.setClickCount(link.getClickCount() + 1);
