@@ -7,4 +7,8 @@ spring:
     password: wannabe4
   jpa:
     show-sql: true
+  jwt:
+    secret: ${JWT_SECRET}
+    accessTokenExpiration: 300
+    refreshTokenExpiration: 604800
 app-url: http://localhost:8080/
