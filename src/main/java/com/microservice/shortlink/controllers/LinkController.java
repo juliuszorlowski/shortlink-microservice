@@ -1,6 +1,7 @@
 package com.microservice.shortlink.controllers;
 
 import com.microservice.shortlink.dtos.CodeDto;
+import com.microservice.shortlink.dtos.ErrorDto;
 import com.microservice.shortlink.dtos.ShortenLinkRequest;
 import com.microservice.shortlink.exceptions.LinkNotFoundException;
 import com.microservice.shortlink.services.LinkService;
@@ -11,7 +12,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
-import java.util.Map;
 
 @RestController
 @RequestMapping()
@@ -49,7 +49,7 @@ public class LinkController {
     }
 
     @ExceptionHandler(LinkNotFoundException.class)
-    public ResponseEntity<Map<String, String>> handleLinkNotFound() {
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("message", "Link not found."));
+    public ResponseEntity<ErrorDto> handleLinkNotFound() {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorDto("Link not found."));
     }
 }

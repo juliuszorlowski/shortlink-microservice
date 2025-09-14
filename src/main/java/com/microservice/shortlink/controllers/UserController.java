@@ -1,9 +1,6 @@
 package com.microservice.shortlink.controllers;
 
-import com.microservice.shortlink.dtos.ChangePasswordRequest;
-import com.microservice.shortlink.dtos.RegisterUserRequest;
-import com.microservice.shortlink.dtos.UpdateUserRequest;
-import com.microservice.shortlink.dtos.UserDto;
+import com.microservice.shortlink.dtos.*;
 import com.microservice.shortlink.entities.Role;
 import com.microservice.shortlink.exceptions.UserNotFoundException;
 import com.microservice.shortlink.mappers.UserMapper;
@@ -119,7 +116,7 @@ public class UserController {
     }
 
     @ExceptionHandler(UserNotFoundException.class)
-    public ResponseEntity<Map<String, String>> handleUserNotFound() {
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("error", "User not found."));
+    public ResponseEntity<ErrorDto> handleUserNotFound() {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorDto("User not found."));
     }
 }
