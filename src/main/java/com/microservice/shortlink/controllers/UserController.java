@@ -41,10 +41,7 @@ public class UserController {
 
     @GetMapping("/{id}")
     public ResponseEntity<UserDto> getUser(@PathVariable Long id) {
-        var user = userRepository.findById(id).orElse(null);
-        if (user == null) {
-            throw new UserNotFoundException();
-        }
+        var user = userRepository.findById(id).orElseThrow(UserNotFoundException::new);
 
         return ResponseEntity.ok(userMapper.toDto(user));
     }
@@ -74,10 +71,7 @@ public class UserController {
     public ResponseEntity<UserDto>  updateUser(
             @PathVariable(name = "id") Long id,
             @RequestBody UpdateUserRequest request) {
-        var user = userRepository.findById(id).orElse(null);
-        if (user == null) {
-            throw new UserNotFoundException();
-        }
+        var user = userRepository.findById(id).orElseThrow(UserNotFoundException::new);
 
         userMapper.update(request, user);
         userRepository.save(user);
@@ -87,10 +81,7 @@ public class UserController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
-        var user = userRepository.findById(id).orElse(null);
-        if (user == null) {
-            throw new UserNotFoundException();
-        }
+        var user = userRepository.findById(id).orElseThrow(UserNotFoundException::new);
 
         userRepository.delete(user);
         return ResponseEntity.noContent().build();
@@ -100,10 +91,7 @@ public class UserController {
     public ResponseEntity<Void> changePassword(
             @PathVariable Long id,
             @RequestBody ChangePasswordRequest request) {
-        var user = userRepository.findById(id).orElse(null);
-        if (user == null) {
-            throw new UserNotFoundException();
-        }
+        var user = userRepository.findById(id).orElseThrow(UserNotFoundException::new);
 
         if (!user.getPassword().equals(request.getOldPassword())) {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);

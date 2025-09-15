@@ -33,10 +33,7 @@ public class LinkService {
 
     @Transactional
     public Link findLinkAndIncrementClickCount(String code) {
-        var link = linkRepository.findByCode(code).orElse(null);
-        if (link == null) {
-            throw new LinkNotFoundException();
-        }
+        var link = linkRepository.findByCode(code).orElseThrow(LinkNotFoundException::new);
 
         link.setClickCount(link.getClickCount() + 1);
         linkRepository.save(link);

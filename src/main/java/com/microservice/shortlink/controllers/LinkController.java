@@ -38,9 +38,6 @@ public class LinkController {
     @GetMapping("/{code}")
     public ResponseEntity<Void> redirectToLink(@PathVariable String code) {
         var link = linkService.findLinkAndIncrementClickCount(code);
-        if (link == null) {
-            throw new LinkNotFoundException();
-        }
 
         return ResponseEntity
                 .status(HttpStatus.FOUND)
