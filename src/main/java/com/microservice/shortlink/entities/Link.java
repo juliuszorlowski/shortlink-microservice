@@ -34,4 +34,8 @@ public class Link {
     @JoinColumn(name = "user_id")
     @ToString.Exclude
     private User user;
+
+    public boolean createdBy(User user) {
+        return this.user.equals(user);
+    }
 }

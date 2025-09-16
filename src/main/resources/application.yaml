@@ -9,6 +9,6 @@ spring:
     show-sql: true
   jwt:
     secret: ${JWT_SECRET}
-    accessTokenExpiration: 300
-    refreshTokenExpiration: 604800
+    accessTokenExpiration: 900 # 15m
+    refreshTokenExpiration: 604800 # 7d
 app-url: http://localhost:8080/
